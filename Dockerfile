@@ -22,5 +22,5 @@ RUN cd /opt \
 VOLUME = ["/cache","/opt/gitlabci/.m2:/root/.m2","/opt/gitlabci/builds:/builds"]
 # run the binary
 #CMD ["echo","hello world"]
-RUN apt-get update
-RUN apt-get -y --fix-missing install tcl tk expect vim git tar 
+#RUN apt-get -y install vim git tar 
+#RUN apt-get update
