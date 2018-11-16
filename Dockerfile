@@ -15,7 +15,7 @@ WORKDIR /go/src/app
 ADD src /opt
 # install docker
 RUN cd /opt \
-    && tar zxvf docker-latest.tgz \
+    && tar zxvf docker-1.10.3.tgz \
     && cp docker/docker /usr/local/bin/ \
     && rm -rf docker docker-latest.tgz
 
