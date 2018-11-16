@@ -19,6 +19,7 @@ RUN cd /opt \
     && cp docker/docker /usr/local/bin/ \
     && rm -rf docker docker-latest.tgz
 
+VOLUME = ["/cache","/opt/gitlabci/.m2:/root/.m2","/opt/gitlabci/builds:/builds"]
 # run the binary
 #CMD ["echo","hello world"]
 RUN apt-get update
