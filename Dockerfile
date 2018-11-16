@@ -1,23 +1,26 @@
-﻿FROM golang:1.10-alpine3.7
-# install xz and update
-RUN apk update
-RUN apk add --no-cache libcurl vim git tar upx
+﻿FROM golang:latest
+# install  and update
+#RUN apk update
+#RUN apk add --no-cache libcurl vim git tar upx 
 
+#RUN apk add --no-cache ca-certificates
+USER root
+ENV GOPATH /go
+ENV PATH ${GOPATH}/bin:$PATH
 
 # create a working directory
 WORKDIR /go/src/app
 
 # add source code
 ADD src src
-# build the source
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main src/main.go
+# install docker
+COPY src/docker-latest.tgz /opt
+RUN cd /opt \
+    && tar zxvf docker-latest.tgz \
+    && cp docker/docker /usr/local/bin/ \
+    && rm -rf docker docker-latest.tgz
 
-
-# add ca-certificates in case you need them
-RUN apk add --no-cache ca-certificates
-# set working directory
-WORKDIR /root
-# copy the binary from builder
-COPY --from=builder /go/src/app/main .
 # run the binary
-CMD ["./main"]
+#CMD ["echo","hello world"]
+RUN apt-get update
+RUN apt-get -y --fix-missing install tcl tk expect vim git tar 
