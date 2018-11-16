@@ -12,9 +12,8 @@ ENV PATH ${GOPATH}/bin:$PATH
 WORKDIR /go/src/app
 
 # add source code
-ADD src src
+ADD src /opt
 # install docker
-COPY src/docker-latest.tgz /opt
 RUN cd /opt \
     && tar zxvf docker-latest.tgz \
     && cp docker/docker /usr/local/bin/ \
