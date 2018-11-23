@@ -1,26 +1,28 @@
 ﻿FROM golang:latest
 # install  and update
-#RUN apk update
-#RUN apk add --no-cache libcurl vim git tar upx 
+# RUN apk update
+# RUN apk add --no-cache libcurl vim git tar upx 
 
-#RUN apk add --no-cache ca-certificates
+# RUN apk add --no-cache ca-certificates
 USER root
 ENV GOPATH /go
 ENV PATH ${GOPATH}/bin:$PATH
-
+ 
 # create a working directory
-WORKDIR /go/src/app
+WORKDIR $GOPATH/src/bbs
+COPY entry.sh /go/src/entry.sh
+RUN chmod a+x /go/src/entry.sh
+# COPY entry.sh ${ENTRY_FILE}
 
-# add source code
-ADD src /opt
-# install docker
-RUN cd /opt \
-    && tar zxvf docker-1.10.3.tgz \
-    && cp docker/docker /usr/local/bin/ \
-    && rm -rf docker docker-latest.tgz
-
-VOLUME = ["/cache","/opt/gitlabci/.m2:/root/.m2","/opt/gitlabci/builds:/builds"]
+VOLUME = ["/cache","/opt/gitlabci/.m2:/root/.m2","/opt/gitlabci/builds:/builds","/go/src:/go/src":]
 # run the binary
-#CMD ["echo","hello world"]
-#RUN apt-get -y install vim git tar 
-#RUN apt-get update
+# CMD ["echo","hello world"]
+# RUN apt-get update
+# RUN apt-get -y install vim git
+# RUN go build main.go
+EXPOSE 8080
+
+# CMD ["/bin/bash"]
+#ENTRYPOINT ["bash /go/src/entry.sh"]
+
+CMD /go/src/entry.sh

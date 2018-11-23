@@ -2,6 +2,8 @@
  for go docker (go module from git clone)
 
 ```
-docker build -t "sujiansoft/godocker:1.10" .
+
+docker build -t "docker-registry.xxx.com/golang/godocker:1.10" .
+docker push "docker-registry.xxxx.com/golang/godocker:1.10"
 
 ```
