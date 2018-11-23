@@ -18,7 +18,7 @@ RUN chmod a+x /go/src/entry.sh
 #设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo '$TZ' > /etc/timezone
 
-VOLUME = ["/cache","/opt/gitlabci/.m2:/root/.m2","/opt/gitlabci/builds:/builds","/go/src:/go/src":]
+VOLUME = ["/cache","/opt/gitlabci/.m2:/root/.m2","/opt/gitlabci/builds:/builds","/go/src:/go/src"]
 # run the binary
 # CMD ["echo","hello world"]
 # RUN apt-get update
@@ -26,7 +26,7 @@ VOLUME = ["/cache","/opt/gitlabci/.m2:/root/.m2","/opt/gitlabci/builds:/builds",
 # RUN go build main.go
 EXPOSE 8080
 
-# CMD ["/bin/bash"]
+
 #ENTRYPOINT ["bash /go/src/entry.sh"]
 
 CMD /go/src/entry.sh
